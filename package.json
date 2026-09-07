@@ -1,0 +1,33 @@
+{
+  "name": "blast",
+  "version": "1.0.0",
+  "description": "Beyblade Logging & Anti-Scalping Technology.",
+  "main": "blast.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+  "type": "git",
+  "url": "git+https://github.com/Sun-After-the-Reign/BLAST.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "nodejs",
+    "scraper",
+    "beyblade"
+  ],
+  "author": "Shishi4272",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sun-After-the-Reign/BLAST/issues"
+  },
+  "homepage": "https://github.com/Sun-After-the-Reign/BLAST#readme",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3"
+  }
+}
