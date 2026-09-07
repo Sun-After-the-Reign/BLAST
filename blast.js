@@ -68,7 +68,7 @@ client.once('clientReady', () => {
   console.log(`Connecté en tant que ${client.user.tag}`)
 
   checkForNewProducts()
-  cron.schedule(' * * * *', checkForNewProducts)
+  cron.schedule('0 * * * *', checkForNewProducts)
   client.user.setPresence({activities: [{ name: "Scroll Amazon JP.", type: 0 }], status: "online"})
 })
 
