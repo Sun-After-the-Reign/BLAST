@@ -7,6 +7,7 @@ const config = require("./config.json")
 
 const TOKEN = config.token
 const CHANNEL_ID = config.channel
+const PING = config.ping
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
@@ -56,7 +57,7 @@ async function checkForNewProducts() {
 
     if (product.image) embed.setThumbnail(product.image)
 
-    await channel.send({ content: "@shishi4272", embeds: [embed] })
+    await channel.send({ content: `<@${PING}>`, embeds: [embed] })
     seenAsins.add(product.asin)
   }
 
