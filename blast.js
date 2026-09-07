@@ -69,6 +69,7 @@ client.once('clientReady', () => {
 
   checkForNewProducts()
   cron.schedule(' * * * *', checkForNewProducts)
+  client.user.setPresence({activities: [{ name: "Scroll Amazon JP.", type: 0 }], status: "online"})
 })
 
 client.login(TOKEN)
