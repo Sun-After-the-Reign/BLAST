@@ -34,14 +34,15 @@ async function checkForNewProducts() {
     return
   }
 
-  if (newProducts.length === 0) {
-    console.log('Aucun nouveau produit.')
-    return
-  }
-
   const channel = await client.channels.fetch(CHANNEL_ID).catch(() => null)
   if (!channel) {
     console.error('Impossible de récupérer le salon Discord (vérifie DISCORD_CHANNEL_ID).')
+    return
+  }
+
+  if (newProducts.length === 0) {
+    console.log('Aucun nouveau produit.')
+    await channel.send('Aucun nouveau produit.')
     return
   }
 
@@ -67,7 +68,7 @@ client.once('clientReady', () => {
   console.log(`Connecté en tant que ${client.user.tag}`)
 
   checkForNewProducts()
-  cron.schedule('0 * * * *', checkForNewProducts)
+  cron.schedule(' * * * *', checkForNewProducts)
 })
 
 client.login(TOKEN)
