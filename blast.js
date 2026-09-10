@@ -6,7 +6,8 @@ const { loadSeenAsins, saveSeenAsins } = require('./storage')
 const config = require("./config.json")
 
 const TOKEN = config.token
-const CHANNEL_ID = config.channel
+const CHANNEL_LOG = config.log
+const CHANNEL_ALERT = config.alert
 const PING = config.ping
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
@@ -35,15 +36,21 @@ async function checkForNewProducts() {
     return
   }
 
-  const channel = await client.channels.fetch(CHANNEL_ID).catch(() => null)
-  if (!channel) {
-    console.error('Impossible de récupérer le salon Discord (vérifie DISCORD_CHANNEL_ID).')
+  const channel_log = await client.channels.fetch(CHANNEL_LOG).catch(() => null)
+  if (!channel_log) {
+    console.error('Impossible de récupérer le salon Discord log (vérifie CHANNEL_LOG).')
+    return
+  }
+
+  const channel_alert = await client.channels.fetch(CHANNEL_ALERT).catch(() => null)
+  if (!channel_alert) {
+    console.error('Impossible de récupérer le salon Discord alerte (vérifie CHANNEL_ALERT).')
     return
   }
 
   if (newProducts.length === 0) {
     console.log('Aucun nouveau produit.')
-    await channel.send('Aucun nouveau produit.')
+    await channel_log.send('Aucun nouveau produit.')
     return
   }
 
@@ -57,7 +64,7 @@ async function checkForNewProducts() {
 
     if (product.image) embed.setThumbnail(product.image)
 
-    await channel.send({ content: `<@${PING}>`, embeds: [embed] })
+    await channel_alert.send({ content: `<@${PING}>`, embeds: [embed] })
     seenAsins.add(product.asin)
   }
 
