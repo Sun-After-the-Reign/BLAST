@@ -76,8 +76,19 @@ client.once('clientReady', () => {
   console.log(`Connecté en tant que ${client.user.tag}`)
 
   checkForNewProducts()
-  cron.schedule('0 * * * *', checkForNewProducts)
+  cron.schedule('1 * * * *', checkForNewProducts)
   client.user.setPresence({activities: [{ name: "Scroll et analyser Amazon JP.", type: 0 }], status: "online"})
+})
+
+client.on('messageCreate', (message) => {
+  if (message.author.bot) return
+  if (!message.content.startsWith("!!!")) return
+  
+  if (message.content.startsWith("!!!say")){
+    message.channel.send(message.content.split("!!!say")[1])
+    return message.delete()
+  }
+  
 })
 
 client.login(TOKEN)
